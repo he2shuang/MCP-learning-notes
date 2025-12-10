@@ -1,0 +1,24 @@
+{
+  "2511.16402v1": {
+    "title": "Trustworthy AI in the Agentic Lakehouse: from Concurrency to Governance",
+    "authors": [
+      "Jacopo Tagliabue",
+      "Federico Bianchi",
+      "Ciro Greco"
+    ],
+    "summary": "Even as AI capabilities improve, most enterprises do not consider agents trustworthy enough to work on production data. In this paper, we argue that the path to trustworthy agentic workflows begins with solving the infrastructure problem first: traditional lakehouses are not suited for agent access patterns, but if we design one around transactions, governance follows. In particular, we draw an operational analogy to MVCC in databases and show why a direct transplant fails in a decoupled, multi-language setting. We then propose an agent-first design, Bauplan, that reimplements data and compute isolation in the lakehouse. We conclude by sharing a reference implementation of a self-healing pipeline in Bauplan, which seamlessly couples agent reasoning with all the desired guarantees for correctness and trust.",
+    "pdf_url": "https://arxiv.org/pdf/2511.16402v1",
+    "published": "2025-11-20"
+  },
+  "2501.02842v1": {
+    "title": "Foundations of GenIR",
+    "authors": [
+      "Qingyao Ai",
+      "Jingtao Zhan",
+      "Yiqun Liu"
+    ],
+    "summary": "The chapter discusses the foundational impact of modern generative AI models on information access (IA) systems. In contrast to traditional AI, the large-scale training and superior data modeling of generative AI models enable them to produce high-quality, human-like responses, which brings brand new opportunities for the development of IA paradigms. In this chapter, we identify and introduce two of them in details, i.e., information generation and information synthesis. Information generation allows AI to create tailored content addressing user needs directly, enhancing user experience with immediate, relevant outputs. Information synthesis leverages the ability of generative AI to integrate and reorganize existing information, providing grounded responses and mitigating issues like model hallucination, which is particularly valuable in scenarios requiring precision and external knowledge. This chapter delves into the foundational aspects of generative models, including architecture, scaling, and training, and discusses their applications in multi-modal scenarios. Additionally, it examines the retrieval-augmented generation paradigm and other methods for corpus modeling and understanding, demonstrating how generative AI can enhance information access systems. It also summarizes potential challenges and fruitful directions for future studies.",
+    "pdf_url": "https://arxiv.org/pdf/2501.02842v1",
+    "published": "2025-01-06"
+  }
+}

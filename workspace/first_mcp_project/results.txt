@@ -1,0 +1,56 @@
+FINDINGS FROM DEEPLEARNING.AI EXPLORATION AND ARXIV PAPER SEARCH
+
+1. INTERESTING TERM FOUND: "AGENTIC AI"
+
+From exploring deeplearning.ai, the most prominent and interesting term identified is "Agentic AI". This term appears in:
+- Their newest course: "Building Coding Agents with Tool Execution"
+- Course description: "Learn to build agentic AI with Andrew Ng"
+- This suggests that agentic AI is a current focus area for deeplearning.ai's educational offerings
+
+2. ARXIV PAPERS ON AGENTIC AI
+
+Two relevant papers were found on arXiv related to agentic AI:
+
+PAPER 1: "Trustworthy AI in the Agentic Lakehouse: from Concurrency to Governance"
+- Authors: Jacopo Tagliabue, Federico Bianchi, Ciro Greco
+- Published: November 20, 2025
+- Key Findings:
+  * Most enterprises don't consider agents trustworthy enough for production data
+  * Traditional lakehouses are not suited for agent access patterns
+  * Proposes "Bauplan" - an agent-first design that reimplements data and compute isolation
+  * Demonstrates a self-healing pipeline that couples agent reasoning with guarantees for correctness and trust
+  * Draws analogy to MVCC (Multi-Version Concurrency Control) in databases
+
+PAPER 2: "Foundations of GenIR"
+- Authors: Qingyao Ai, Jingtao Zhan, Yiqun Liu
+- Published: January 6, 2025
+- Key Findings:
+  * Discusses the impact of generative AI on information access systems
+  * Identifies two key paradigms: information generation and information synthesis
+  * Information generation allows AI to create tailored content addressing user needs
+  * Information synthesis integrates and reorganizes existing information to provide grounded responses
+  * Addresses challenges like model hallucination through retrieval-augmented generation
+  * Explores multi-modal scenarios and corpus modeling
+
+3. SYNTHESIS AND INSIGHTS
+
+The exploration reveals several important trends:
+
+a) Industry-Academia Alignment: deeplearning.ai's focus on "agentic AI" aligns with current academic research on making AI agents more trustworthy and capable.
+
+b) Infrastructure Challenges: Paper 1 highlights that infrastructure (not just algorithms) is a key barrier to deploying agentic AI in production environments.
+
+c) Evolution from Traditional to Agentic AI: Paper 2 shows how generative AI is enabling new paradigms (information generation/synthesis) that go beyond traditional information retrieval.
+
+d) Trust and Governance: Both the industry focus (deeplearning.ai courses) and academic research emphasize the importance of trust, governance, and reliability in agentic systems.
+
+e) Practical Applications: The research points toward practical implementations like self-healing pipelines and retrieval-augmented generation that bridge the gap between theoretical capabilities and real-world deployment.
+
+4. CONCLUSION
+
+Agentic AI represents a significant evolution in AI systems, moving from passive tools to active agents that can reason, execute tools, and interact with complex data environments. The alignment between deeplearning.ai's educational focus and current academic research suggests this is a rapidly developing field with both commercial and research significance. Key challenges include infrastructure design, trustworthiness, and governance, while opportunities lie in creating more autonomous, reliable, and capable AI systems.
+
+--- 
+Analysis completed on: Current date
+Source: deeplearning.ai website and arXiv paper search
+Search term: "agentic AI"

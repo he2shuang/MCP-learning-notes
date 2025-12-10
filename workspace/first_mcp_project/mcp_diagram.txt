@@ -1,0 +1,180 @@
+# Model Context Protocol (MCP) Architecture Diagram
+
+## Overall Architecture
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    MCP ECOSYSTEM                             │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐         │
+│  │  MCP Spec   │  │   MCP SDKs  │  │ Dev Tools   │         │
+│  │             │  │             │  │ (Inspector) │         │
+│  └─────────────┘  └─────────────┘  └─────────────┘         │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │              Reference Implementations              │   │
+│  └─────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Core Participants
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    MCP HOST                                 │
+│              (AI Application)                               │
+│                 e.g., VS Code, Claude Desktop               │
+├─────────────────────────────────────────────────────────────┤
+│                                                            │
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    │
+│  │ MCP CLIENT  │    │ MCP CLIENT  │    │ MCP CLIENT  │    │
+│  │  (1:1)      │    │  (1:1)      │    │  (1:1)      │    │
+│  └──────┬──────┘    └──────┬──────┘    └──────┬──────┘    │
+│         │                  │                  │           │
+└─────────┼──────────────────┼──────────────────┼───────────┘
+          │                  │                  │
+          ▼                  ▼                  ▼
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│ MCP SERVER  │    │ MCP SERVER  │    │ MCP SERVER  │
+│  (Local)    │    │  (Remote)   │    │  (Remote)   │
+│ Filesystem  │    │   Sentry    │    │    Other    │
+└─────────────┘    └─────────────┘    └─────────────┘
+```
+
+## Protocol Layers
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    TRANSPORT LAYER                          │
+│  (Outer Layer - Communication Channels)                     │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐        ┌─────────────────┐           │
+│  │   STDIO         │        │  HTTP           │           │
+│  │   Transport     │        │  Transport      │           │
+│  │                 │        │                 │           │
+│  │ • Local process │        │ • Remote server │           │
+│  │ • No network    │        │ • HTTP POST     │           │
+│  │ • High perf     │        │ • SSE streaming │           │
+│  └─────────────────┘        └─────────────────┘           │
+└─────────────────────────────────────────────────────────────┘
+                            │
+┌─────────────────────────────────────────────────────────────┐
+│                    DATA LAYER                               │
+│  (Inner Layer - JSON-RPC 2.0 Protocol)                      │
+├─────────────────────────────────────────────────────────────┤
+│                                                            │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │              LIFECYCLE MANAGEMENT                   │   │
+│  │ • Initialization                                    │   │
+│  │ • Capability negotiation                            │   │
+│  │ • Connection termination                            │   │
+│  └─────────────────────────────────────────────────────┘   │
+│                                                            │
+│  ┌─────────────────────────────────────────────────────┐   │
+│  │                 PRIMITIVES                          │   │
+│  │                                                    │   │
+│  │  SERVER PRIMITIVES        CLIENT PRIMITIVES        │   │
+│  │  ─────────────────        ─────────────────        │   │
+│  │  • Tools                   • Sampling              │   │
+│  │  • Resources               • Elicitation           │   │
+│  │  • Prompts                 • Logging               │   │
+│  │                                                    │   │
+│  │  UTILITY FEATURES                                  │   │
+│  │  • Notifications                                   │   │
+│  │  • Tasks (Experimental)                            │   │
+│  └─────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Server Primitives Detail
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    SERVER PRIMITIVES                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                            │
+│  TOOLS                         RESOURCES                   │
+│  ─────                         ────────                   │
+│  • Executable functions        • Data sources             │
+│  • AI actions                  • Context information      │
+│  • File operations             • File contents            │
+│  • API calls                   • Database records         │
+│  • Database queries            • API responses            │
+│                                                            │
+│  Methods:                     Methods:                    │
+│  • tools/list                 • resources/list           │
+│  • tools/call                 • resources/get            │
+│                                                            │
+│  PROMPTS                                                    │
+│  ───────                                                    │
+│  • Reusable templates                                      │
+│  • Interaction structures                                  │
+│  • System prompts                                          │
+│  • Few-shot examples                                       │
+│                                                            │
+│  Methods:                                                  │
+│  • prompts/list                                            │
+│  • prompts/get                                             │
+│                                                            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Client Primitives Detail
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    CLIENT PRIMITIVES                        │
+├─────────────────────────────────────────────────────────────┤
+│                                                            │
+│  SAMPLING                      ELICITATION                 │
+│  ────────                      ──────────                 │
+│  • Request LLM completions     • Request user input       │
+│  • Model-independent           • Get additional info      │
+│  • sampling/complete method    • elicitation/request      │
+│                                                            │
+│  LOGGING                                                    │
+│  ───────                                                    │
+│  • Send debug messages                                     │
+│  • Monitoring                                              │
+│  • Error reporting                                         │
+│                                                            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Communication Flow
+```
+┌─────────┐          ┌─────────┐          ┌─────────┐
+│  MCP    │ 1. Init  │  MCP    │ 2. List  │  MCP    │
+│ Client  │─────────▶│ Server  │◀─────────│ Client  │
+│         │          │         │          │         │
+│         │ 3. Call  │         │ 4. Resp  │         │
+│         │─────────▶│         │─────────▶│         │
+│         │          │         │          │         │
+│         │ 5. Notif │         │          │         │
+│         │◀─────────│         │          │         │
+└─────────┘          └─────────┘          └─────────┘
+
+1. Initialization: Capability negotiation
+2. Discovery: Client requests list of available primitives
+3. Execution: Client calls tools or requests resources
+4. Response: Server returns results
+5. Notification: Server sends real-time updates
+```
+
+## Key Characteristics
+```
+• Protocol: JSON-RPC 2.0 based
+• Architecture: Client-Server with 1:1 client-server mapping
+• Transport: Stdio (local) or HTTP (remote)
+• Focus: Context exchange protocol only
+• Abstraction: SDKs handle implementation details
+• Extensibility: Primitive-based system
+• Real-time: Notification support
+```
+
+## Use Case Example
+```
+Visual Studio Code (MCP Host)
+    ├── MCP Client 1 → Filesystem Server (Local, Stdio)
+    ├── MCP Client 2 → Sentry Server (Remote, HTTP)
+    └── MCP Client 3 → Database Server (Remote, HTTP)
+
+Each client maintains independent connection
+Each server exposes different primitives
+Host coordinates all clients and their context
+```

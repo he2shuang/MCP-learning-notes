@@ -1,0 +1,38 @@
+{
+    "name": "search_papers",
+    "title": null,
+    "description": "Search for papers on arXiv based on a topic and store their information.\n\nArgs:\n    topic: The topic to search for\n    max_results: Maximum number of results to retrieve (default: 5)\n    \nReturns:\n    List of paper IDs found in the search",
+    "inputSchema": {
+        "properties": {
+            "topic": {
+                "title": "Topic",
+                "type": "string"
+            },
+            "max_results": {
+                "default": 5,
+                "title": "Max Results",
+                "type": "integer"
+            }
+        },
+        "required": ["topic"],
+        "title": "search_papersArguments",
+        "type": "object"
+    },
+    "outputSchema": {
+        "properties": {
+            "result": {
+                "items": {
+                    "type": "string"
+                },
+                "title": "Result",
+                "type": "array"
+            }
+        },
+        "required": ["result"],
+        "title": "search_papersOutput",
+        "type": "object"
+    },
+    "icons": null,
+    "annotations": null,
+    "meta": null
+}
