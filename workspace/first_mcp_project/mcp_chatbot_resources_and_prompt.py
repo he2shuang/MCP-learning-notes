@@ -205,7 +205,7 @@ class MCP_ChatBot:
         """Run an interactive chat loop"""
         print("\nMCP Chatbot Started!")
         print("Type your queries or 'quit' to exit.")
-        print("Use @floders to see available prompts.")
+        print("Use @folders to see available prompts.")
         print("Use @<topic> to search papers in that topic.")
         print("Use /prompts to lies available prompts.")
         print("Use /prompt <name> <arg1=value1> to execute a prompt.")
@@ -224,8 +224,8 @@ class MCP_ChatBot:
                 if query.startswith("@"):
                     # remove @ sign
                     topic = query[1:]
-                    if topic == "floders":
-                        resource_uri = "papers://floders"
+                    if topic == "folders":
+                        resource_uri = "papers://folders"
                     else:
                         resource_uri = f"papers://{topic}"
                     await self.get_resource(resource_uri)
