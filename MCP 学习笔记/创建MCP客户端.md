@@ -240,3 +240,6 @@ Query:quit
 5. 结果会发回 Claude
 6. Claude 提供自然语言的响应
 7. 回答会显示给你
+
+
+# 使用 resources 和 prompt
