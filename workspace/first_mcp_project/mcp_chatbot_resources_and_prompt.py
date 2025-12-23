@@ -69,10 +69,10 @@ class MCP_ChatBot:
                 if resources_response and resources_response.resources:
                     for resource in resources_response.resources:
                         resource_uri = str(resource.uri)
-                        self.sessions[resource.name] = session
+                        self.sessions[resource_uri] = session
             
             except Exception as e:
-                print(f"Failed to list tools, prompts, or resources: {e}")
+                print(f"Failed to list tools, prompts, or resources at {server_name}: {e}")
 
         except Exception as e:
             print(f"Failed to connect to {server_name}: {e}")
@@ -102,6 +102,7 @@ class MCP_ChatBot:
             
             assistant_content = []
             has_tool_use = False
+
             for content in response.content:
                 if content.type =='text':
                     print(content.text)
@@ -110,26 +111,27 @@ class MCP_ChatBot:
                     has_tool_use = True
                     assistant_content.append(content)
                     messages.append({'role':'assistant', 'content':assistant_content})
-                # Get session and call tool
-                session = self.sessions.get(content.name)
-                if not session:
-                    print(f"Tool {content.name} not found in sessions")
-                    break
+                    
+                    # Get session and call tool
+                    session = self.sessions.get(content.name)
+                    if not session:
+                        print(f"Tool {content.name} not found in sessions")
+                        break
 
-                result = await session.call_tool(content.name, arguments=content.input)
-                messages.append({"role": "user",
-                                  "content": [
-                                      {
-                                          "type": "tool_result",
-                                          "tool_use_id":content.id,
-                                          "content": result.content
-                                      }
-                                  ]
-                                })
+                    result = await session.call_tool(content.name, arguments=content.input)
+                    messages.append({"role": "user",
+                                    "content": [
+                                        {
+                                            "type": "tool_result",
+                                            "tool_use_id":content.id,
+                                            "content": result.content
+                                        }
+                                    ]
+                                    })
 
-                # Exit loop if no tool was used
-                if not has_tool_use:
-                    break                      
+            # Exit loop if no tool was used
+            if not has_tool_use:
+                break                      
 
     async def get_resource(self, resource_uri):
         """Get a resource from the server."""
@@ -147,7 +149,7 @@ class MCP_ChatBot:
             return
         
         try:
-            result = await session.get_resource(uri=resource_uri)
+            result = await session.read_resource(uri=resource_uri)
             if result and result.contents:
                 print(f"\nResource {resource_uri}")
                 print("Content:")
@@ -189,12 +191,13 @@ class MCP_ChatBot:
                 # Extract text from content (handles different formats)
                 if isinstance(prompt_content, str):
                     text = prompt_content
-                elif isinstance(prompt_content, 'text'):
+                elif hasattr(prompt_content, 'text'):
                     text = prompt_content.text
                 else:
                     # Handle list of content items
                     text = " ".join(item.text if hasattr(item, 'text') else str(item) for item in prompt_content)
                 print(f"\nExecuting Prompt '{prompt_name}' ...")
+                print(f"\nPrompt Content: {text}")
                 await self.process_query(text)  
             
         except Exception as e:

@@ -1,0 +1,21 @@
+{
+  "1110.0625v1": {
+    "title": "On the history of the isomorphism problem of dynamical systems with special regard to von Neumann's contribution",
+    "authors": [
+      "Miklos Redei",
+      "Charlotte Werndl"
+    ],
+    "summary": "This paper reviews some major episodes in the history of the spatial isomorphism problem of dynamical systems theory (ergodic theory). In particular, by analysing, both systematically and in historical context, a hitherto unpublished letter written in 1941 by John von Neumann to Stanislaw Ulam, this paper clarifies von Neumann's contribution to discovering the relationship between spatial isomorphism and spectral isomorphism. The main message of the paper is that von Neumann's argument described in his letter to Ulam is the very first proof that spatial isomorphism and spectral isomorphism are not equivalent because spectral isomorphism is weaker than spatial isomorphism: von Neumann shows that spectrally isomorphic ergodic dynamical systems with mixed spectra need not be spatially isomorphic.",
+    "pdf_url": "https://arxiv.org/pdf/1110.0625v1",
+    "published": "2011-10-04"
+  },
+  "2503.04313v1": {
+    "title": "Episodes from the history of infinitesimals",
+    "authors": [
+      "Mikhail G. Katz"
+    ],
+    "summary": "Infinitesimals have seen ups and downs in their tumultuous history. In the 18th century, d'Alembert set the tone by describing infinitesimals as chimeras. Some adversaries of infinitesimals, including Moigno and Connes, picked up on the term. We highlight the work of Cauchy, Noël, Poisson and Riemann. We also chronicle reactions by Moigno, Lamarle and Cantor, and signal the start of a revival with Peano.",
+    "pdf_url": "https://arxiv.org/pdf/2503.04313v1",
+    "published": "2025-03-06"
+  }
+}

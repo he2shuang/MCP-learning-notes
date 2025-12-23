@@ -7,7 +7,7 @@
 
     "research": {
       "command": "uv",
-      "args": ["run", "research_server.py"]
+      "args": ["run", "research_server_resources_and_prompt.py"]
     },
 
     "fetch": {
